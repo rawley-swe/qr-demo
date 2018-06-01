@@ -7,13 +7,16 @@
   <body>
     <video id="preview"></video>
     <script type="text/javascript">
-      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      let opts = {
+        video: document.getElementById('preview'),
+        mirror: false,
+      }
+      let scanner = new Instascan.Scanner(opts);
       scanner.addListener('scan', function (content) {
         console.log(content);
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
-          console.log(cameras[2]);
           scanner.start(cameras[1]);
         } else {
           console.error('No cameras found.');
